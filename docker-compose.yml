@@ -1,0 +1,29 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile 
+    ports:
+      - "3000:80"  # Map port 80 in the container to port 3000 on the host
+    depends_on:
+      - backend  # Ensure backend starts first
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile 
+    ports:
+      - "5000:5000"  # Map port 5000 in the container to port 5000 on the host
+    environment:
+      - PORT=5000
+      - MONGODB_URL=mongodb+srv://mmrityunjay727:PV3YrHOB9DRomJIN@cluster0.dj6oj.mongodb.net/temperature-moniter?retryWrites=true&w=majority&appName=Cluster0
+      - N8N_WEBHOOK_URL=https://mrityu.app.n8n.cloud/webhook/6f7b288e-1efe-4504-a6fd-660931327269
+      - USE_N8N=false
+    networks:
+      - app-network  # Ensure both frontend and backend are on the same network
+
+networks:
+  app-network:
+    driver: bridge

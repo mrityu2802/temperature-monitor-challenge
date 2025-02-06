@@ -20,7 +20,6 @@ const App = () => {
     });
 
     socket.on("rocords", (records) => {
-      console.log(records);
       setLastReadings(records);
     });
 
@@ -30,7 +29,6 @@ const App = () => {
 
     return () => {
       socket.disconnect();
-      clearTimeout();
     };
   }, []);
 
