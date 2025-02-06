@@ -37,11 +37,15 @@ setInterval(async () => {
 
   const totalRecords = await Temperature.countDocuments();
   if (totalRecords > 5) {
-    const oldestRecords = await Temperature.find()
-      .sort({ timestamp: 1 })
-      .limit(totalRecords - 5);
-    const oldestIds = oldestRecords.map((record) => record._id);
-    await Temperature.deleteMany({ _id: { $in: oldestIds } });
+    const latestRecords = await Temperature.find()
+      .sort({ timestamp: -1 }) 
+      .limit(5); 
+
+    const latestIds = latestRecords.map((record) => record._id);
+
+    await Temperature.deleteMany({
+      _id: { $nin: latestIds },
+    });
   }
 
   io.emit("temperature_reading", reading);
