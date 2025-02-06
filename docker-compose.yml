@@ -20,7 +20,7 @@ services:
       - PORT=5000
       - MONGODB_URL=mongodb+srv://mmrityunjay727:PV3YrHOB9DRomJIN@cluster0.dj6oj.mongodb.net/temperature-moniter?retryWrites=true&w=majority&appName=Cluster0
       - N8N_WEBHOOK_URL=https://mrityu.app.n8n.cloud/webhook/6f7b288e-1efe-4504-a6fd-660931327269
-      - USE_N8N=false
+      - USE_N8N=true
     networks:
       - app-network  # Ensure both frontend and backend are on the same network
 
