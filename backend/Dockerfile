@@ -1,7 +1,7 @@
 FROM node:18
-WORKDIR /app
-COPY backend/package*.json ./ 
+WORKDIR /app/backend
+COPY ./package*.json ./ 
 RUN npm install
-COPY backend/src/ ./src/     
+COPY ./src .
 EXPOSE 5000
 CMD ["npm", "start"]

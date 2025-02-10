@@ -62,7 +62,11 @@ const App = () => {
               {currentReading?.temperature}°C
             </h3>
             <div className="flex gap-2 flex-wrap">
-              <span className="font-semibold text-green-500">NORMAL</span>•
+              {currentReading?.status ? (
+                <GetStatus card={true} status={currentReading.status} />
+              ) : (
+                <Loader className={"size-5"} />
+              )}
               <span>
                 Last updated: {moment(currentReading?.timestamp).fromNow()}
               </span>
@@ -93,7 +97,7 @@ const App = () => {
                 </span>
               </div>
               {reading?.status ? (
-                <GetStatus status={reading.status} />
+                <GetStatus card={false} status={reading.status} />
               ) : (
                 <Loader className={"size-5"} />
               )}
